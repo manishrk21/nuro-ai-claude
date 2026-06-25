@@ -1,0 +1,105 @@
+// FILE: constants/onboardingQuestions.js | PURPOSE: All onboarding step questions and options | CONNECTS TO: OnboardingPage.jsx
+
+export const onboardingQuestions = [
+  // ─── ADDED: First step to ask for the patient's full name ───
+  {
+    id: 'name',
+    type: 'text',
+    question: 'What should we call you?',
+    placeholder: 'Your full name or preferred name',
+    required: true,
+    note: 'This helps your therapist know who they are speaking with.',
+  },
+  {
+    id: 'country',
+    type: 'searchable-select',
+    question: 'Where are you based?',
+    placeholder: 'Search your country…',
+    options: ['India', 'United States', 'United Kingdom', 'Canada', 'Australia', 'Germany', 'Singapore', 'UAE', 'Other'],
+    required: true,
+  },
+  {
+    id: 'age',
+    type: 'number',
+    question: 'How old are you?',
+    placeholder: 'Your age',
+    min: 13,
+    max: 99,
+    required: true,
+    note: 'You must be 13 or older to use NURO AI.',
+  },
+  {
+    id: 'gender',
+    type: 'single-select',
+    question: 'How do you identify?',
+    options: ['Man', 'Woman', 'Non-binary', 'Prefer not to say', 'Other'],
+    allowCustom: true,
+    required: false,
+  },
+  {
+    id: 'relationship_status',
+    type: 'single-select',
+    question: 'What\'s your relationship status?',
+    options: ['Single', 'In a relationship', 'Married', 'It\'s complicated', 'Prefer not to say'],
+    required: false,
+  },
+  {
+    id: 'religion_important',
+    type: 'single-select',
+    question: 'Is religion important to you?',
+    options: ['Yes', 'Somewhat', 'No'],
+    required: false,
+  },
+  {
+    id: 'spiritual',
+    type: 'single-select',
+    question: 'Do you consider yourself spiritual?',
+    options: ['Yes', 'No', 'Not sure'],
+    required: false,
+  },
+  {
+    id: 'therapy_history',
+    type: 'single-select',
+    question: 'Have you had therapy before?',
+    options: ['Yes, I\'m currently in therapy', 'Yes, in the past', 'No, this is my first time'],
+    required: false,
+  },
+  {
+    id: 'support_expectation',
+    type: 'single-select',
+    question: 'What do you expect from support?',
+    options: ['Someone who listens', 'Someone who guides me', 'Both'],
+    required: false,
+  },
+  {
+    id: 'panic_attacks',
+    type: 'single-select',
+    question: 'Have you experienced panic attacks?',
+    options: ['Yes', 'No', 'Not sure'],
+    required: false,
+  },
+  {
+    id: 'medication',
+    type: 'single-select',
+    question: 'Are you currently taking medication for mental health?',
+    options: ['Yes', 'No', 'Prefer not to say'],
+    required: false,
+  },
+  {
+    id: 'financial_comfort',
+    type: 'single-select',
+    question: 'How would you describe your financial situation right now?',
+    note: 'This helps us show therapists within your budget. It\'s never shown to therapists.',
+    options: ['Comfortable', 'Managing', 'Struggling'],
+    required: false,
+  },
+  {
+    id: 'sleep_quality',
+    type: 'single-select',
+    question: 'How has your sleep been lately?',
+    options: ['Good', 'Inconsistent', 'Poor'],
+    required: false,
+  },
+]
+
+// CHANGE THIS FILE IF YOU WANT TO: add, remove, or reorder onboarding questions; change options
