@@ -5,25 +5,8 @@ from utils.supabase_client import get_supabase
 
 
 class ChatRepo:
-    def _verify_session_ownership(self, session_id: str, user_id: str) -> bool:
+    def save_message(self, session_id: str, role: str, content: str, tokens_used: int = 0) -> dict:
         sb = get_supabase()
-        res = (
-            sb.table("chat_sessions")
-            .select("id")
-            .eq("id", session_id)
-            .eq("user_id", user_id)
-            .maybe_single()
-            .execute()
-        )
-        return bool(res.data)
-
-
-    def save_message(self, session_id: str, user_id: str, role: str, content: str, tokens_used: int = 0) -> dict:
-        sb = get_supabase()
-        # Ensure the session belongs to this user (service role bypasses RLS)
-        if not self._verify_session_ownership(session_id, user_id):
-            raise PermissionError("Session does not belong to user")
-
         res = sb.table("chat_messages").insert({
             "session_id": session_id,
             "role": role,
@@ -32,12 +15,8 @@ class ChatRepo:
         }).execute()
         return res.data[0] if res.data else {}
 
-    def get_recent_messages(self, session_id: str, user_id: str, limit: int = 20) -> list:
+    def get_recent_messages(self, session_id: str, limit: int = 20) -> list:
         sb = get_supabase()
-        # Verify ownership first
-        if not self._verify_session_ownership(session_id, user_id):
-            raise PermissionError("Session does not belong to user")
-
         res = (
             sb.table("chat_messages")
             .select("role, content")
